@@ -16,22 +16,18 @@ class App extends Component {
         };
     }
     handleSubmit(event) {
-        console.log('?');
         event.preventDefault();
      
         const plantData = {
             name: ReactDOM.findDOMNode(this.refs.plantName).value.trim(),
             description: ReactDOM.findDOMNode(this.refs.plantDescription).value.trim(),
         };
-        // console.log(plantData);
         // Find the text field via the React ref
         const plantName = ReactDOM.findDOMNode(this.refs.plantName).value.trim();
         // const plantDescription = ReactDOM.findDOMNode(this.refs.plantDescription).value.trim();
         if(plantName != ""){
-            // Meteor.call('plants.insert', plantName);
             Meteor.call('plants.insertMultiple', plantData);
         }
-        // Meteor.call('plants.insert', plantDescription);
      
         // Clear form
         ReactDOM.findDOMNode(this.refs.plantName).value = '';
@@ -88,8 +84,8 @@ class App extends Component {
                 </form></div> : ''
             }
         </header>
- 
-        <ul>
+        
+        <ul className="plant-list">
             {this.renderPlants()}
         </ul>
       </div>

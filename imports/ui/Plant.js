@@ -22,7 +22,9 @@ export default class Plant extends Component {
         
                 <span className="text">
                     <strong>{this.props.plant.username}</strong>: {this.props.plant.name}
-                    <i>{this.props.plant.description}</i>
+                </span>
+                <span className="text">
+                <i>{this.props.plant.description}</i>
                 </span>
             </li>
         );
