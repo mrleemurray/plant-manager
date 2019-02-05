@@ -13,11 +13,18 @@ class App extends Component {
      
         this.state = {
             hideCompleted: false,
+            hideNewPlant: true,
         };
     }
+
+    toggleNewPlant() {
+        const currentState = this.state.hideNewPlant;
+        this.setState({ hideNewPlant: !currentState });
+    }
+
     handleSubmit(event) {
         event.preventDefault();
-     
+        console.log(ReactDOM.findDOMNode(this.refs.purchaseDate).value.trim(),);
         const plantData = {
             name: ReactDOM.findDOMNode(this.refs.plantName).value.trim(),
             description: ReactDOM.findDOMNode(this.refs.plantDescription).value.trim(),
@@ -34,17 +41,17 @@ class App extends Component {
         ReactDOM.findDOMNode(this.refs.plantDescription).value = '';
     }
     
-    toggleHideCompleted() {
-        this.setState({
-            hideCompleted: !this.state.hideCompleted,
-        });
-    }
+    // toggleHideCompleted() {
+    //     this.setState({
+    //         hideCompleted: !this.state.hideCompleted,
+    //     });
+    // }
 
     renderPlants() {
         let filteredPlants = this.props.plants;
-        if (this.state.hideCompleted) {
-            filteredPlants = filteredPlants.filter(plant => !plant.checked);
-        }
+        // if (this.state.hideCompleted) {
+        //     filteredPlants = filteredPlants.filter(plant => !plant.checked);
+        // }
         return filteredPlants.map((plant) => {
             const currentUserId = this.props.currentUser && this.props.currentUser._id;
             const showPrivateButton = plant.owner === currentUserId;
@@ -53,7 +60,7 @@ class App extends Component {
               <Plant
                 key={plant._id}
                 plant={plant}
-                showPrivateButton={showPrivateButton}
+                // showPrivateButton={showPrivateButton}
               />
             );
           });
@@ -63,31 +70,35 @@ class App extends Component {
         return (
             <div className="container">
             <header>
-            <h1>Plant Manager</h1>
-
+            <div className="app-title">
+            <h1><i>Plants, Plants, Plants</i></h1>
             <AccountsUIWrapper />
+            </div>
+            
             { this.props.currentUser ?
-                <div className="new-plant-container">
-                <h2>Create new plant</h2>
+                <div className={this.state.hideNewPlant ? 'new-plant-container hide': 'new-plant-container'} >
+                <h2 onClick={this.toggleNewPlant.bind(this)}><b>+</b> Create new plant</h2>
                 <form className="new-plant">
                     <input
                         type="text"
                         ref="plantName"
-                        placeholder="Plant Name"
+                        placeholder="Plant Name (required)"
                     />
                     <input
                         type="text"
                         ref="plantDescription"
                         placeholder="Description"
                     />
+                    Date of purchase:
+                    <input type="date" id="purchase" ref="purchaseDate" placeholder="Purchase Date"></input>
                     <button className="form-Submit" onClick={this.handleSubmit.bind(this)}>ADD PLANT</button>
                 </form></div> : ''
             }
         </header>
         
-        <ul className="plant-list">
+        <div className="plant-list">
             {this.renderPlants()}
-        </ul>
+        </div>
       </div>
     );
   }

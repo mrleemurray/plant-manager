@@ -47,6 +47,7 @@ Meteor.methods({
         createdAt: new Date(),
         owner: this.userId,
         username: Meteor.users.findOne(this.userId).username,
+        expanded: false,
       });
     },
     'plants.remove'(plantId) {
@@ -85,4 +86,11 @@ Meteor.methods({
      
         Plants.update(plantId, { $set: { private: setToPrivate } });
       },
+      // 'plants.toggleView'(plantId) {
+      //   check(plantId, String);
+      //   const plant = Plants.findOne(plantId);
+      //   Plants.update(plantId, {
+      //     $set: { expanded: !plant.expanded},
+      //   });
+      // },
   });
