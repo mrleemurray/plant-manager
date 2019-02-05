@@ -44,6 +44,7 @@ Meteor.methods({
       Plants.insert({
         name: object.name,
         description: object.description,
+        purchase: object.purchase,
         createdAt: new Date(),
         owner: this.userId,
         username: Meteor.users.findOne(this.userId).username,

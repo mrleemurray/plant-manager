@@ -56,6 +56,10 @@ header {
   background: #3ca570;
   border: 1px solid #3ca570;
 }
+
+#login-buttons .login-button:hover, .accounts-dialog .login-button:hover {
+  background: #2c7a53;
+}
  
 h1 {
   font-size: 1.5em;
@@ -74,7 +78,7 @@ h2 {
 }
 
 .new-plant-container{
-  height: 215px;
+  height: 300px;
   margin: 10px 0;
   padding: 20px 10px 0;
   border-style: solid;
@@ -96,12 +100,21 @@ h2 {
   margin: 20px 0;
   padding: 10px;
   border-radius: 5px;
+  border-style: none;
   color: #fff;
   background-color: #3ca570;
 }
 
-#purchase{
- color: aqua;
+.datePicker{
+  margin-top: 20px;
+  padding-top: 10px;
+  border-style: solid;
+  border-top-color: #999;
+  border-width: 1px 0px 0px 0px;
+}
+
+.datePicker input{
+  color: #2c7a53;
 }
  
 form {
@@ -109,18 +122,43 @@ form {
   position: relative;
 }
  
-.new-plant input {
+.new-plant .text-input {
   box-sizing: border-box;
-  padding: 10px 0;
+  padding: 10px 0 0 0;
   background: transparent;
   border: none;
   width: 100%;
-  padding-right: 80px;
   font-size: 1em;
 }
 
 .new-plant input:focus{
   outline: 0;
+}
+
+.slidecontainer {
+  width: 100%; /* Width of the outside container */
+}
+
+.slider{
+  margin: 20px 0;
+  -webkit-appearance: none;  /* Override default CSS styles */
+  appearance: none;
+  width: 100%;
+  height: 3px; /* Specified height */
+  border-radius: 1.5px;
+  background: #ccc; /* Grey background */
+  /* outline: none; Remove outline */
+  opacity: 0.7; /* Set transparency (for mouse-over effects on hover) */
+}
+
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none; /* Override default look */
+  appearance: none;
+  width: 15px; /* Set a specific slider handle width */
+  height: 15px; /* Slider handle height */
+  border-radius: 7.5px;
+  background: #3ca570; /* Green background */
+  cursor: pointer; /* Cursor on hover */
 }
  
 .plant-list {
@@ -134,20 +172,11 @@ form {
  
 .plantItem {
   width: 300px;
-  height: 250px;
-  margin: 10px;
+  margin: 10px 10px 0px 10px;
   border-radius: 5px;
   background-color: #fff;
   box-shadow: 2px 2px 10px #aaa;
   overflow: hidden;
-  animation-name: expandIn;
-  animation-duration: 0.2s;
-}
-
-.expanded{
-  height: 400px;
-  animation-name: expandOut;
-  animation-duration: 0.2s;
 }
 
 .plant-hero{
@@ -161,6 +190,46 @@ form {
 
 .plant-info{
   padding: 10px;
+  height: 15px;
+  overflow: hidden;
+  animation-name: expandIn;
+  animation-duration: 0.2s;
+}
+
+.expanded{
+  height: 150px;
+  animation-name: expandOut;
+  animation-duration: 0.2s;
+}
+
+.plant-info .text{
+  float: left;
+  width: 100%;
+  padding-bottom: 10px;
+}
+
+.plant-title{
+  width: 100%;
+  height: 15px;
+  padding-bottom: 10px;
+  float: left;
+}
+
+.plant-name{
+  float: left;
+}
+
+.plant-creator{
+  color: #999;
+}
+
+.water-status{
+  float: right;
+  margin: 5px;
+  height: 5px;
+  border-radius: 2.5px;
+  width: 20%;
+  background-color: #3ca570;
 }
 
 #login-buttons .login-close-text{
@@ -179,23 +248,23 @@ form {
 }
 
 @keyframes expandOut {
-  from {height: 250px;}
-  to {height: 400px;}
+  from {height: 15px;}
+  to {height: 150px;}
 }
 
 @keyframes expandIn {
-  from {height: 400px;}
-  to {height: 250px;}
+  from {height: 150px;}
+  to {height: 15px;}
 }
 
 @keyframes collapse {
-  from {height: 215px;}
+  from {height: 300px;}
   to {height: 25px;}
 }
 
 @keyframes expand {
   from {height: 25px;}
-  to {height: 215px;}
+  to {height: 300px;}
 }
 
  
@@ -222,7 +291,6 @@ form {
   
   .plant-hero{
     width: 100%;
-    height: 200px;
   }
   
   .plant-info{

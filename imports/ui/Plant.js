@@ -16,23 +16,22 @@ export default class Plant extends Component {
     }
 
     render() {
-        // Give plants a different className when they are checked off,
-        // so that we can style them nicely in CSS
-        const plantClassName = classnames({
-            plantItem: true,
-            expanded: this.props.plant.expanded,
-          });
-
         return (
-            <div className={this.state.active ? 'plantItem expanded': 'plantItem'}  onClick={this.toggleView.bind(this)}>
-                <img className="plant-hero" ></img>
-                <div className="plant-info">
-                    <span className="text">
-                        <strong>{this.props.plant.username}</strong>: {this.props.plant.name}
-                    </span>
-                    <span className="text">
+            <div className="plantItem"  onClick={this.toggleView.bind(this)}>
+                <div className="plant-hero" ></div>
+                <div className={this.state.active ? 'plant-info expanded': 'plant-info'}>
+                    <div className="plant-title">
+                        <div className="plant-name">
+                            <strong>{this.props.plant.name}</strong>
+                        </div>
+                        <div className="water-status"></div>
+                    </div>
+                    <div className="text plant-description">
                         <i>{this.props.plant.description}</i>
-                    </span>
+                    </div>
+                    <div className="text plant-creator">
+                        <i>Added by {this.props.plant.username} on {this.props.plant.purchase}</i>
+                    </div>
                 </div>
             </div>
         );
